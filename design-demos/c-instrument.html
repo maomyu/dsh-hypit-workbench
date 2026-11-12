@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Hypit 工作台 · Instrument</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="assets/host-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef1f0; --card:#ffffff; --ink:#0d1211; --ink-2:#333d3a; --dim:#4c5751; --faint:#5f6a65;
+    --line:#dfe4e1; --line-2:#eef1ef;
+    --green:#0e7c5a; --green-soft:#e6f2ec; --acid:#c9f24d; --alert:#d2502a;
+    --sans:"Inter","PingFang SC",system-ui,sans-serif;
+    --grotesk:"Space Grotesk","Inter","PingFang SC",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#e4e8e6;font-family:var(--sans);color:var(--ink)}
+  .app{width:1240px;margin:0 auto;background:var(--bg);min-height:900px;display:grid;grid-template-columns:196px 366px 1fr}
+
+  /* rail */
+  .rail{border-right:1px solid var(--line);padding:20px 16px;display:flex;flex-direction:column;gap:22px;background:#f6f8f7}
+  .rail .mk{display:flex;align-items:center;gap:8px}
+  .rail .mk img{height:15px}
+  .rail .mk b{font:500 11px var(--grotesk);letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+  .rail h2{margin:0 0 8px;font:500 9.5px var(--mono);letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+  .env{display:flex;flex-direction:column;gap:9px}
+  .e{display:flex;align-items:center;gap:8px;font:400 11.5px var(--mono);color:var(--dim)}
+  .e i{width:7px;height:7px;border-radius:2px;background:var(--green)}
+  .e i.w{background:#d9a63c}
+  .e b{color:var(--ink);font-weight:400;margin-left:auto}
+  .rootcard{border:1px solid var(--line);background:var(--card);border-radius:6px;padding:9px 10px}
+  .rootcard span{display:block;font:400 9.5px var(--mono);letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+  .rootcard b{display:block;margin-top:4px;font:400 12px var(--mono)}
+  .rootcard em{display:block;margin-top:3px;font:400 10.5px var(--sans);color:var(--dim);font-style:normal}
+  .rail .spacer{flex:1}
+  .rail .note{font:400 10.5px/1.7 var(--sans);color:var(--faint)}
+
+  /* list */
+  .list{border-right:1px solid var(--line);padding:20px 0 0;background:var(--bg)}
+  .list-h{display:flex;align-items:baseline;justify-content:space-between;padding:0 18px 10px}
+  .list-h h2{margin:0;font:600 17px/1 var(--grotesk);letter-spacing:-.01em}
+  .list-h span{font:400 10.5px var(--mono);color:var(--faint)}
+  .cols{display:grid;grid-template-columns:1fr 46px 52px;gap:6px;padding:0 18px 7px;font:500 9px var(--mono);letter-spacing:.12em;color:var(--faint);text-transform:uppercase}
+  .cols span:nth-child(2),.cols span:nth-child(3){text-align:right}
+  .p{display:grid;grid-template-columns:1fr 46px 52px;gap:6px;align-items:center;padding:11px 18px;border-top:1px solid var(--line-2);cursor:pointer;position:relative;background:transparent}
+  .p:hover{background:#f7f9f8}
+  .p.on{background:var(--card);box-shadow:inset 3px 0 0 var(--acid)}
+  .p .nm{display:flex;align-items:center;gap:7px;font:500 13.5px var(--grotesk)}
+  .p .nm i{width:5px;height:5px;border-radius:50%;background:var(--green)}
+  .p .nm i.w{background:#d9a63c}
+  .p .path{grid-column:1 / 2;margin-top:2px;font:400 10px var(--mono);color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .p .num{text-align:right;font:500 12px var(--mono);color:var(--ink-2)}
+  .p .num.z{color:var(--faint)}
+  .p .tm{grid-column:1 / -1;margin-top:6px;font:400 10.5px var(--mono);color:var(--faint)}
+  .list-foot{margin:16px 18px;padding-top:12px;border-top:1px solid var(--line);font:400 10.5px/1.7 var(--mono);color:var(--faint)}
+
+  /* inspector */
+  .insp{padding:20px 24px 0;min-width:0;background:var(--card)}
+  .ihead{display:flex;align-items:flex-start;gap:14px;padding-bottom:14px}
+  .ihead h1{margin:0;font:600 25px/1.1 var(--grotesk);letter-spacing:-.015em}
+  .ihead p{margin:5px 0 0;font:400 10.5px var(--mono);color:var(--faint)}
+  .state{margin-left:auto;display:flex;align-items:center;gap:6px;background:var(--acid);color:#1a2410;font:600 10px var(--mono);letter-spacing:.06em;padding:5px 8px;border-radius:3px}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .m{padding:14px 0 13px;border-right:1px solid var(--line)}
+  .m:last-child{border-right:0}
+  .m em{display:block;font:500 9.5px var(--mono);letter-spacing:.14em;color:var(--faint);text-transform:uppercase;font-style:normal}
+  .m b{display:block;margin-top:2px;font:500 40px/.95 var(--grotesk);letter-spacing:-.03em}
+  .m b small{font:400 12px var(--mono);color:var(--faint);letter-spacing:0;margin-left:5px}
+  .m p{margin:5px 0 0;font:400 10.5px var(--sans);color:var(--dim)}
+
+  .cmd{margin-top:14px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .cmd-h{display:flex;align-items:center;gap:8px;padding:8px 11px;background:#f7f9f8;border-bottom:1px solid var(--line-2)}
+  .cmd-h b{font:500 11.5px var(--mono);color:var(--ink-2)}
+  .cmd-h .sp{margin-left:auto;font:400 10px var(--mono);color:var(--green)}
+  .cmd pre{margin:0;padding:10px 11px;font:400 11px/1.7 var(--mono);color:var(--ink-2);white-space:pre-wrap;word-break:break-word;background:var(--card)}
+  .cmd pre .g{color:var(--green)} .cmd pre .d{color:var(--faint)}
+
+  .sect{margin-top:16px}
+  .sect-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px}
+  .sect-h h3{margin:0;font:600 11px var(--mono);letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+  .sect-h span{font:400 10px var(--mono);color:var(--faint)}
+  .src{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line-2);border-radius:5px;margin-bottom:5px;cursor:pointer}
+  .src.on{border-color:#bfe6d3;background:var(--green-soft)}
+  .src b{font:400 11.5px var(--mono);font-weight:400}
+  .src em{margin-left:auto;font:400 10px var(--mono);color:var(--faint);font-style:normal}
+  .code{margin-top:6px;border:1px solid var(--line);border-radius:6px;background:#fbfcfb;padding:10px 12px;max-height:150px;overflow:hidden}
+  .code pre{margin:0;font:400 10.5px/1.75 var(--mono);color:var(--ink-2);white-space:pre-wrap}
+  .code .ln{display:inline-block;width:22px;color:#b3bcb8;user-select:none}
+
+  .hand{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;display:flex;gap:14px;align-items:flex-end}
+  .hand .left{flex:1;min-width:0}
+  .kinds{display:flex;gap:6px;margin-bottom:9px}
+  .kind{font:400 11px var(--sans);color:var(--dim);border:1px solid var(--line);border-radius:4px;padding:5px 9px;cursor:pointer}
+  .kind.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .hand label span{display:block;font:500 9px var(--mono);letter-spacing:.14em;color:var(--faint);text-transform:uppercase;margin-bottom:5px}
+  .hand input{width:100%;border:1px solid var(--line);border-radius:5px;background:#fbfcfb;font:400 12.5px var(--mono);padding:9px 10px;outline:none}
+  .go{border:0;border-radius:5px;background:var(--ink);color:#fff;font:500 12px var(--sans);padding:10px 15px;cursor:pointer;white-space:nowrap}
+  .fine{margin-top:9px;padding-bottom:16px;display:flex;justify-content:space-between;font:400 9.5px var(--mono);color:var(--faint)}
+</style>
+
+<style>
+  .app{font-size:14px}
+  .rail .mk b{font-size:12px}
+  .rail h2{font-size:12px;letter-spacing:.12em}
+  .e{font-size:12px}
+  .rootcard span{font-size:12px}
+  .rootcard b{font-size:12.5px}
+  .rootcard em{font-size:12px}
+  .rail .note{font-size:12px}
+  .list-h span{font-size:12px}
+  .cols{font-size:11px}
+  .p .nm{font-size:14px}
+  .p .num{font-size:12.5px}
+  .p .path{font-size:12px}
+  .p .tm{font-size:12px}
+  .list-foot{font-size:12px}
+  .ihead p{font-size:12px}
+  .state{font-size:11.5px}
+  .m em{font-size:11.5px}
+  .m p{font-size:12.5px}
+  .cmd-h b{font-size:12px}
+  .cmd pre{font-size:12px}
+  .sect-h h3{font-size:11.5px}
+  .sect-h span{font-size:11.5px}
+  .src b{font-size:12.5px}
+  .src em{font-size:11.5px}
+  .code pre{font-size:12px}
+  .code{max-height:128px}
+  .hand .kind{font-size:12.5px}
+  .hand label span{font-size:11.5px}
+  .hand input{font-size:13px}
+  .fine{font-size:11.5px}
+</style>
+
+<style>
+  :root{
+    --bg:var(--ui-bg-base); --card:var(--ui-bg-layer); --ink:var(--ui-ink); --ink-2:var(--ui-ink-2);
+    --dim:var(--ui-ink-2); --faint:var(--ui-ink-3); --line:var(--ui-line-2); --line-2:var(--ui-line-1);
+    --green:var(--ui-ok-text); --green-soft:var(--ui-ok-bg); --acid:var(--ui-accent); --alert:var(--ui-danger);
+  }
+  body{background:var(--ui-bg-sunken)}
+  .rail{background:var(--ui-bg-sunken)}
+  .list{background:var(--ui-bg-base)}
+  .p.on{background:var(--ui-bg-layer);box-shadow:inset 3px 0 0 var(--ui-accent)}
+  .p:hover{background:var(--ui-hover)}
+  .state{background:var(--ui-accent);color:var(--ui-on-accent)}
+  .cmd-h{background:var(--ui-bg-sunken)}
+  .code{background:var(--ui-code-bg)}
+  .src.on{border-color:color-mix(in srgb,var(--ui-ok) 45%,transparent);background:var(--ui-ok-bg)}
+  .go{background:var(--ui-primary);color:var(--ui-on-primary)}
+  .kind.on{background:var(--ui-primary);color:var(--ui-on-primary);border-color:var(--ui-primary)}
+  .e i{background:var(--ui-ok)}
+  .e i.w{background:var(--ui-warn)}
+  .cmd-h .sp{color:var(--ui-ok-text)}
+  .m b{font-variant-numeric:tabular-nums}
+  .rail .lg-dark{display:none}
+  @media (prefers-color-scheme:dark){.rail .lg-light{display:none}.rail .lg-dark{display:inline-block}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="mk"><img class="lg-light" src="assets/hypit-logo-dark.svg" alt="Hypit"><img class="lg-dark" src="assets/hypit-logo-light.svg" alt="Hypit"><b>Workbench</b></div>
+
+    <section>
+      <h2>Environment</h2>
+      <div class="env">
+        <div class="e"><i></i>执行器<b>0.3.2</b></div>
+        <div class="e"><i></i>技能<b>已安装</b></div>
+        <div class="e"><i></i>Node<b>v24.21.0</b></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Scan root</h2>
+      <div class="rootcard">
+        <span>Root</span><b>~/Hypit</b><em>2 个项目 · 可写</em>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+    <p class="note">只读项目文件。<br>校验与规划在本机跑，不联网。</p>
+  </aside>
+
+  <section class="list">
+    <div class="list-h"><h2>项目</h2><span>2</span></div>
+    <div class="cols"><span>名称</span><span>源</span><span>Run</span></div>
+
+    <div class="p on">
+      <div class="nm"><i></i>smoke-test</div>
+      <div class="num">1</div><div class="num">3</div>
+      <div class="path">~/Hypit/smoke-test</div>
+      <div class="tm">12 分钟前 · 28 outputs</div>
+    </div>
+
+    <div class="p">
+      <div class="nm"><i class="w"></i>podcast-clip</div>
+      <div class="num">1</div><div class="num">3</div>
+      <div class="path">~/Hypit/podcast-clip</div>
+      <div class="tm">3 分钟前 · 未校验</div>
+    </div>
+
+    <p class="list-foot">目录里没有 package.json，或没有 hypit.project = true 的，不会出现在这里。</p>
+  </section>
+
+  <main class="insp">
+    <header class="ihead">
+      <div>
+        <h1>smoke-test</h1>
+        <p>~/Hypit/smoke-test · examples/production.svml</p>
+      </div>
+      <span class="state">SRC OK</span>
+    </header>
+
+    <div class="metrics">
+      <div class="m"><em>Outputs</em><b>28</b><p>源码声明的产出</p></div>
+      <div class="m"><em>Requests</em><b>6</b><p>plan 预估的执行</p></div>
+      <div class="m"><em>Check</em><b>3.2<small>s</small></b><p>本机校验耗时</p></div>
+    </div>
+
+    <div class="cmd">
+      <div class="cmd-h"><b>hypit check examples/production.svml</b><span class="sp">PASS</span></div>
+<pre><span class="g">+</span> Source is valid
+
+  Source   examples/production.svml
+  Outputs  28</pre>
+    </div>
+
+    <div class="cmd">
+      <div class="cmd-h"><b>hypit plan examples/production.svrun</b><span class="sp">PASS</span></div>
+<pre><span class="g">+</span> Build plan is valid
+  Targets  final.video    Requests  6
+
+<span class="d">@hypit/seedance</span>#seedance-2-mini   <span class="d">1×  5s  720p  9:16</span>
+<span class="d">@hypit/media-operations</span>#mux-program-media</pre>
+    </div>
+
+    <section class="sect">
+      <div class="sect-h"><h3>Sources</h3><span>1 svml · 2 svs</span></div>
+      <div class="src on"><b>examples/production.svml</b><em>3.8 KB · 75 行</em></div>
+      <div class="code">
+<pre><span class="ln">1</span>&lt;?svml using="@hypit/markup@1"?&gt;
+<span class="ln">2</span>&lt;svml&gt;
+<span class="ln">3</span>  &lt;import as="audio" from="@hypit/audio-track@1"/&gt;
+<span class="ln">4</span>  &lt;import as="visual" from="@hypit/visual-track@1"/&gt;
+<span class="ln">5</span>  &lt;script id="story"&gt;&lt;opening&gt;…&lt;/opening&gt;&lt;/script&gt;</pre>
+      </div>
+    </section>
+
+    <div class="hand">
+      <div class="left">
+        <div class="kinds"><span class="kind">克隆</span><span class="kind on">从描述制作</span><span class="kind">继续</span></div>
+        <label><span>Brief</span><input value="20 秒竖屏，咖啡对比测评"></label>
+      </div>
+      <button class="go">写成对话草稿</button>
+    </div>
+    <div class="fine"><span>草稿不自动发送 · 不产生费用</span><span>hypit-workbench 0.2.0</span></div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Hypit 视频工作台">
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#fdeef3"/>
+  <path d="M15 19.5h22a3 3 0 0 1 3 3v18" fill="none" stroke="#DF3C68" stroke-width="3" stroke-linecap="round" stroke-opacity="0.45"/>
+  <rect x="22" y="23" width="28" height="22" rx="4.5" fill="none" stroke="#DF3C68" stroke-width="3.2"/>
+  <path d="m33 28.6 8.4 5.4-8.4 5.4z" fill="#DF3C68"/>
+</svg>

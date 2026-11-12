@@ -1,0 +1,93 @@
+/* 宿主主题层：把 DeepSeek Harness 的 --dsw-alias-* 映射成本设计用的语义色。
+   值来自 0.2.2-rc.1 运行实例的 getComputedStyle（浅/深两套），不是猜的。
+   正式落地时删掉 :root 里模拟的 --dsw-*，直接吃宿主变量即可。 */
+
+:root {
+  /* —— 模拟宿主（浅色） —— */
+  --dsw-alias-bg-base: #ffffff;
+  --dsw-alias-bg-layer-1: #ffffff;
+  --dsw-alias-bg-layer-2: #f9fafb;
+  --dsw-alias-bg-layer-3: #f1f3f5;
+  --dsw-alias-label-primary: #0f1115;
+  --dsw-alias-label-secondary: #61666b;
+  --dsw-alias-label-caption: #adb2b8;
+  --dsw-alias-label-primary-foreground: #ffffff;
+  --dsw-alias-border-l1: #0000000a;
+  --dsw-alias-border-l2: #0000001a;
+  --dsw-alias-border-l3: #0000001f;
+  --dsw-alias-border-l4: #00000029;
+  --dsw-alias-interactive-bg-hover: #2631480f;
+  --dsw-alias-state-business-primary: #4176e6;
+  --dsw-alias-state-success-primary: #22c55e;
+  --dsw-alias-state-success-tertiary: #e6faed;
+  --dsw-alias-state-warn-primary: #f59e0b;
+  --dsw-alias-state-warn-tertiary: #fef5e7;
+  --dsw-alias-state-error-secondary: #f25a5a;
+  --dsw-alias-button-primary-fill: #0f1115;
+  --dsw-alias-markdown-code-block: #f9fafb;
+  --dsw-alias-illustration-surface: #edf0f4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dsw-alias-bg-base: #151517;
+    --dsw-alias-bg-layer-1: #232324;
+    --dsw-alias-bg-layer-2: #2c2c2e;
+    --dsw-alias-bg-layer-3: #353638;
+    --dsw-alias-label-primary: #f9fafb;
+    --dsw-alias-label-secondary: #cfd3d6;
+    --dsw-alias-label-caption: #81858c;
+    --dsw-alias-label-primary-foreground: #0f1115;
+    --dsw-alias-border-l1: #ffffff0f;
+    --dsw-alias-border-l2: #ffffff1f;
+    --dsw-alias-border-l3: #ffffff29;
+    --dsw-alias-border-l4: #ffffff33;
+    --dsw-alias-interactive-bg-hover: #ffffff14;
+    --dsw-alias-state-business-primary: #7aaaff;
+    --dsw-alias-state-success-primary: #22c55e;
+    --dsw-alias-state-success-tertiary: #233c2c;
+    --dsw-alias-state-warn-primary: #f59e0b;
+    --dsw-alias-state-warn-tertiary: #27241f;
+    --dsw-alias-state-error-secondary: #f25a5a;
+    --dsw-alias-button-primary-fill: #f9fafb;
+    --dsw-alias-markdown-code-block: #1b1b1c;
+    --dsw-alias-illustration-surface: #2c2c2e;
+  }
+}
+
+:root {
+  /* —— 语义层（三方向只许用这些） —— */
+  --ui-bg-base: var(--dsw-alias-bg-base);
+  --ui-bg-layer: var(--dsw-alias-bg-layer-1);
+  --ui-bg-sunken: var(--dsw-alias-bg-layer-2);
+  --ui-bg-raise: var(--dsw-alias-bg-layer-3);
+  --ui-ink: var(--dsw-alias-label-primary);
+  --ui-ink-2: var(--dsw-alias-label-secondary);
+  --ui-ink-3: var(--dsw-alias-label-caption);
+  --ui-line-1: var(--dsw-alias-border-l1);
+  --ui-line-2: var(--dsw-alias-border-l2);
+  --ui-line-3: var(--dsw-alias-border-l3);
+  --ui-line-4: var(--dsw-alias-border-l4);
+  --ui-hover: var(--dsw-alias-interactive-bg-hover);
+  --ui-accent: var(--dsw-alias-state-business-primary);
+  --ui-on-accent: #ffffff;
+  --ui-primary: var(--dsw-alias-button-primary-fill);
+  --ui-on-primary: var(--dsw-alias-label-primary-foreground);
+  --ui-code-bg: var(--dsw-alias-markdown-code-block);
+  --ui-ok: var(--dsw-alias-state-success-primary);
+  --ui-ok-bg: var(--dsw-alias-state-success-tertiary);
+  --ui-warn: var(--dsw-alias-state-warn-primary);
+  --ui-warn-bg: var(--dsw-alias-state-warn-tertiary);
+  --ui-danger: var(--dsw-alias-state-error-secondary);
+  /* 成功色当正文时对比度不够，单独给一个可读版本 */
+  --ui-ok-text: #15803d;
+  --ui-font: -apple-system, "system-ui", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ui-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ui-on-accent: #0f1115;
+    --ui-ok-text: #4ade80;
+  }
+}

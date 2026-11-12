@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Hypit 剧本台 · Script desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="assets/host-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f0e6; --paper-2:#efeade; --ink:#23201b; --ink-2:#4a443b;
+    --dim:#5c5346; --faint:#7d7566; --rule:#d8d1c0; --rule-strong:#c3baa6;
+    --seal:#a8372a; --ok:#3c6b4f;
+    --serif:"Newsreader","Songti SC","Source Han Serif SC",serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --sans:"PingFang SC","Hiragino Sans GB",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#e7e1d3;font-family:var(--sans);color:var(--ink)}
+  .page{width:1240px;margin:0 auto;background:var(--paper);min-height:900px;padding:0 0 26px;
+    background-image:radial-gradient(rgba(120,105,80,.055) 1px,transparent 1px);
+    background-size:4px 4px;}
+  .mast{display:flex;align-items:flex-end;gap:20px;padding:26px 34px 12px;border-bottom:2px solid var(--ink)}
+  .mast h1{margin:0;font:500 30px/1 var(--serif);letter-spacing:-.01em}
+  .mast .slash{font:300 26px/1 var(--serif);color:var(--faint)}
+  .mast .sub{font:400 13px/1.4 var(--serif);color:var(--dim);padding-bottom:3px}
+  .mast .right{margin-left:auto;text-align:right;font:400 10.5px/1.9 var(--mono);color:var(--dim);letter-spacing:.02em}
+  .mast .right b{color:var(--ink);font-weight:400}
+  .subrule{height:1px;background:var(--rule);margin:0 34px}
+  .ruleline{display:flex;gap:26px;padding:9px 34px 0;font:400 10px/1 var(--mono);letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+  .ruleline span::before{content:"·";margin-right:8px;color:var(--rule-strong)}
+  .ruleline span:first-child::before{content:""}
+
+  .body{display:grid;grid-template-columns:228px minmax(0,1fr) 252px;gap:0;padding:20px 34px 0}
+
+  /* index */
+  .index{padding-right:22px;border-right:1px solid var(--rule)}
+  .index h2{margin:0 0 12px;font:500 10px var(--mono);letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+  .item{padding:11px 0 12px;border-bottom:1px dotted var(--rule-strong);cursor:pointer;position:relative}
+  .item .t{display:flex;align-items:center;gap:7px;font:500 15px/1.2 var(--serif)}
+  .item .seal{width:6px;height:6px;border-radius:50%;background:var(--seal)}
+  .item .seal.soft{background:var(--rule-strong)}
+  .item .p{margin:4px 0 0;font:400 10.5px var(--mono);color:var(--faint);word-break:break-all}
+  .item .m{margin:6px 0 0;font:400 11px var(--serif);color:var(--dim);font-style:italic}
+  .item.on .t{color:var(--seal)}
+  .item.on::after{content:"正在读";position:absolute;right:0;top:12px;font:400 9.5px var(--mono);color:var(--seal);letter-spacing:.08em}
+  .index .note{margin-top:16px;font:400 10.5px/1.8 var(--serif);color:var(--faint);font-style:italic}
+
+  /* manuscript */
+  .ms{padding:0 26px;min-width:0}
+  .ms-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--rule)}
+  .chap{padding:0 0 9px 0;margin-right:18px;font:400 13px var(--serif);color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;transform:translateY(1px)}
+  .chap b{font:400 10px var(--mono);color:var(--faint);margin-left:5px}
+  .chap.on{color:var(--ink);border-bottom-color:var(--seal)}
+  .ms h2{margin:16px 0 2px;font:500 27px/1.15 var(--serif);letter-spacing:-.01em}
+  .ms .byline{margin:0;font:400 11.5px/1.6 var(--mono);color:var(--faint)}
+  .scene{margin-top:18px;font:400 10px var(--mono);letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+  .code{margin-top:8px;border-top:1px solid var(--rule);padding-top:12px}
+  .code pre{margin:0;font:400 11.5px/1.95 var(--mono);color:var(--ink-2);white-space:pre-wrap;word-break:break-word}
+  .code .ln{display:inline-block;width:26px;color:var(--faint);user-select:none}
+  .code .tag{color:var(--seal)}
+  .caption{margin-top:12px;padding-top:8px;border-top:1px solid var(--rule);font:400 11px/1.7 var(--serif);color:var(--faint);font-style:italic}
+
+  /* margin notes */
+  .notes{border-left:1px solid var(--rule);padding-left:20px}
+  .notes h2{margin:0 0 12px;font:500 10px var(--mono);letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+  .note{margin-bottom:20px;padding-left:11px;border-left:2px solid var(--seal)}
+  .note.ok{border-left-color:var(--ok)}
+  .note .h{font:500 11px var(--mono);color:var(--ink);letter-spacing:.02em}
+  .note .h em{font:italic 400 12px var(--serif);color:var(--dim);font-style:italic;margin-left:5px}
+  .note p{margin:6px 0 0;font:400 12.5px/1.7 var(--serif);color:var(--ink-2)}
+  .note p b{font-weight:600}
+  .note .st{display:inline-block;margin-top:7px;font:400 9.5px var(--mono);letter-spacing:.08em;color:var(--ok);border:1px solid rgba(60,107,79,.4);padding:2px 5px;border-radius:2px}
+  .note .st.run{color:#8a6a1f;border-color:rgba(138,106,31,.35)}
+  .notes .tail{font:400 10.5px/1.8 var(--serif);color:var(--faint);font-style:italic;padding-top:6px;border-top:1px dotted var(--rule-strong)}
+
+  /* annotation bar */
+  .annot{margin:22px 34px 0;border-top:2px solid var(--ink);padding-top:14px;display:flex;gap:18px;align-items:flex-end}
+  .annot .left{flex:1;min-width:0}
+  .annot .kinds{display:flex;gap:14px;margin-bottom:9px}
+  .annot .kind{font:400 12px var(--serif);color:var(--dim);padding-bottom:3px;border-bottom:1px solid transparent;cursor:pointer}
+  .annot .kind.on{color:var(--ink);border-bottom-color:var(--seal)}
+  .annot label span{display:block;font:400 10px var(--mono);letter-spacing:.12em;color:var(--faint);text-transform:uppercase;margin-bottom:6px}
+  .annot input{width:100%;border:0;border-bottom:1px solid var(--rule-strong);background:transparent;font:400 14px var(--serif);color:var(--ink);padding:5px 0;outline:none}
+  .sealbtn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 12px var(--sans);padding:10px 18px;cursor:pointer;letter-spacing:.02em}
+  .fine{margin:12px 34px 0;display:flex;justify-content:space-between;font:400 10px var(--mono);color:var(--faint);letter-spacing:.04em}
+</style>
+
+<style>
+  .page{font-size:14px}
+  .mast .sub{font-size:14px}
+  .mast .right{font-size:12px}
+  .ruleline{font-size:12px}
+  .index h2,.notes h2{font-size:12px;letter-spacing:.12em}
+  .item .t{font-size:15px}
+  .item .p{font-size:12px}
+  .item .m{font-size:12.5px}
+  .index .note{font-size:12px}
+  .chap{font-size:14px}
+  .chap b{font-size:11.5px}
+  .ms .byline{font-size:12px}
+  .scene{font-size:12px}
+  .code pre{font-size:12.5px;line-height:1.85}
+  .caption{font-size:12.5px}
+  .note .h{font-size:12px}
+  .note .h em{font-size:13px}
+  .note p{font-size:13.5px}
+  .note .st{font-size:11.5px}
+  .notes .tail{font-size:12px}
+  .annot .kind{font-size:14px}
+  .annot label span{font-size:12px}
+  .annot input{font-size:15px}
+  .fine{font-size:12px}
+</style>
+
+<style>
+  :root{
+    --paper:var(--ui-bg-base); --paper-2:var(--ui-bg-sunken); --ink:var(--ui-ink); --ink-2:var(--ui-ink-2);
+    --dim:var(--ui-ink-2); --faint:var(--ui-ink-3); --rule:var(--ui-line-2); --rule-strong:var(--ui-line-3);
+    --seal:var(--ui-accent); --ok:var(--ui-ok-text);
+  }
+  body{background:var(--ui-bg-sunken)}
+  .page{background:var(--ui-bg-base);background-image:none}
+  .subrule{background:var(--ui-line-2)}
+  .ruleline span::before{background:none;color:var(--ui-ink-3)}
+  .item.on::after{color:var(--ui-accent)}
+  .item.on .t{color:var(--ui-accent)}
+  .chap.on{color:var(--ui-ink);border-bottom-color:var(--ui-accent)}
+  .code .tag{color:var(--ui-accent)}
+  .annot .kind.on{border-bottom-color:var(--ui-accent)}
+  .sealbtn{background:var(--ui-primary);color:var(--ui-on-primary);border-color:var(--ui-primary)}
+  .note .st{color:var(--ui-ok-text);border-color:color-mix(in srgb,var(--ui-ok) 45%,transparent)}
+  .note .st.run{color:var(--ui-warn);border-color:color-mix(in srgb,var(--ui-warn) 40%,transparent)}
+  .note.ok{border-left-color:var(--ui-ok)}
+  .item .seal{background:var(--ui-accent)}
+  .item .seal.soft{background:var(--ui-line-4)}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="mast">
+    <h1>剧本台</h1><span class="slash">/</span>
+    <span class="sub">Hypit 视频项目 · 从源码读到能不能拍</span>
+    <div class="right">
+      执行器 <b>0.3.2</b>　技能 已安装　Node <b>v24.21.0</b><br>
+      根目录 <b>~/Hypit</b> · 2 个项目 · 2026-11-11 15:12
+    </div>
+  </header>
+  <div class="subrule"></div>
+  <div class="ruleline"><span>只读</span><span>本地文件</span><span>不联网校验</span><span>不自动发送</span></div>
+
+  <div class="body">
+    <aside class="index">
+      <h2>项目</h2>
+      <div class="item on">
+        <div class="t"><i class="seal"></i>smoke-test</div>
+        <p class="p">~/Hypit/smoke-test</p>
+        <p class="m">1 源 · 3 Run · 12 分钟前</p>
+      </div>
+      <div class="item">
+        <div class="t"><i class="seal soft"></i>podcast-clip</div>
+        <p class="p">~/Hypit/podcast-clip</p>
+        <p class="m">1 源 · 3 Run · 3 分钟前</p>
+      </div>
+      <p class="note">目录里没有 package.json 或缺少 hypit.project 的，不会出现在这里。</p>
+    </aside>
+
+    <main class="ms">
+      <div class="ms-head">
+        <div class="chap on">production.svml<b>75 行</b></div>
+        <div class="chap">look.svs<b>4 行</b></div>
+        <div class="chap">direction.svs<b>15 行</b></div>
+      </div>
+
+      <h2>smoke-test</h2>
+      <p class="byline">~/Hypit/smoke-test · examples/production.svml · 3.8 KB</p>
+
+      <div class="scene">第 1 场 · 源码</div>
+      <div class="code">
+<pre><span class="ln">1</span>&lt;?svml using=<span class="tag">"@hypit/markup@1"</span>?&gt;
+<span class="ln">2</span>&lt;svml&gt;
+<span class="ln">3</span>  &lt;import as=<span class="tag">"audio"</span> from=<span class="tag">"@hypit/audio-track@1"</span>/&gt;
+<span class="ln">4</span>  &lt;import as=<span class="tag">"visual"</span> from=<span class="tag">"@hypit/visual-track@1"</span>/&gt;
+<span class="ln">5</span>  &lt;import from=<span class="tag">"@hypit/script@1"</span>/&gt;
+<span class="ln">6</span>  &lt;import as=<span class="tag">"seedance"</span> from=<span class="tag">"@hypit/seedance@1"</span>/&gt;
+<span class="ln">7</span>  &lt;script id=<span class="tag">"story"</span>&gt;
+<span class="ln">8</span>    &lt;opening&gt;&lt;HOST&gt;Here is @{proof}the useful part.@{/proof}&lt;/opening&gt;
+<span class="ln">9</span>  &lt;/script&gt;
+<span class="ln">10</span>  &lt;space:Canvas id=<span class="tag">"canvas"</span> width=<span class="tag">"720"</span> height=<span class="tag">"1280"</span>/&gt;</pre>
+      </div>
+      <p class="caption">正文是源码本身；能不能拍，写在右边的页边。</p>
+    </main>
+
+    <aside class="notes">
+      <h2>页边</h2>
+
+      <div class="note ok">
+        <div class="h">hypit check <em>校订</em></div>
+        <p>源码可读，<b>28 处产出</b>，没有引用错误。</p>
+        <span class="st">通过 · 3.2s</span>
+      </div>
+
+      <div class="note ok">
+        <div class="h">hypit plan <em>排期</em></div>
+        <p>这条 Run 会发 <b>6 个请求</b>：1 次 <b>seedance 5 秒 720p 竖屏</b>，其余是音频渲染、mux 与栅格化。</p>
+        <span class="st">通过 · 3.0s</span>
+      </div>
+
+      <div class="note">
+        <div class="h">还差一步 <em>拍摄条件</em></div>
+        <p>Runtime Profile 未选，模型账号未接。<b>build 现在发不出去</b>，这不是代码问题。</p>
+        <span class="st run">待配置</span>
+      </div>
+
+      <p class="tail">页边只写事实：命令、耗时、卡在哪。不写鼓励的话。</p>
+    </aside>
+  </div>
+
+  <div class="annot">
+    <div class="left">
+      <div class="kinds">
+        <span class="kind">克隆参考视频</span>
+        <span class="kind on">从描述制作</span>
+        <span class="kind">继续这个项目</span>
+      </div>
+      <label>
+        <span>批注 · 想做什么视频</span>
+        <input value="20 秒竖屏，咖啡对比测评">
+      </label>
+    </div>
+    <button class="sealbtn">写成对话草稿</button>
+  </div>
+  <div class="fine"><span>只生成草稿，不替你发送，不产生费用</span><span>hypit-workbench 0.2.0</span></div>
+</div>
+</body>
+</html>

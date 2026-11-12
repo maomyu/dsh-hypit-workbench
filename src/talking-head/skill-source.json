@@ -1,0 +1,20 @@
+{
+  "version": "1.23.8",
+  "localSource": "vendor/wanggan",
+  "sourceCommit": "e8c258329b2677d479062725326d18a948cab2d5",
+  "selectionSource": [
+    "registry/families.json",
+    "registry/production-catalog.json",
+    "registry/branches.json",
+    "registry/components.json",
+    "registry/orchestrations.json"
+  ],
+  "legacyCatalogVisible": false,
+  "hashes": {
+    "registry/families.json": "0602cc264d7582a9c5c4ec85332ebaf3c50e2b56a8f7bd41f93e4b350d350f52",
+    "registry/production-catalog.json": "19b4ef8c29e6ad138c10872d063edfce63e195f2a4b2675dca4254ae25dcab3e",
+    "registry/branches.json": "caa9ffff58b4b70c98d197233c46d9acc7e12f81ed6abd00d367e18e3cd8aa21",
+    "registry/components.json": "df95c598c1bf31963f8f5e8002b244e7d6f4e5f9a5f0bfb04c86e6bac70d8046",
+    "registry/orchestrations.json": "1e271e7ef20ce35666236da18d0498ac201be64b44cd48d236bf40c807748fcb"
+  }
+}

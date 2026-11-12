@@ -1,0 +1,5 @@
+# Match the verified 0.4.5 video-production and transcription environment.
+numpy==2.4.4
+Pillow==12.1.0
+fonttools==4.62.1
+faster-whisper==1.2.1

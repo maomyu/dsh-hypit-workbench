@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>三方向 · 绑定宿主配色</title>
+<link rel="stylesheet" href="assets/host-theme.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ui-bg-sunken);color:var(--ui-ink);font-family:var(--ui-font)}
+  .wrap{width:1300px;margin:0 auto;padding:30px 24px 40px}
+  header{display:flex;align-items:flex-end;border-bottom:1px solid var(--ui-line-2);padding-bottom:14px}
+  h1{margin:0;font-size:22px;letter-spacing:-.01em}
+  header p{margin:5px 0 0;color:var(--ui-ink-2);font-size:13px}
+  .meta{margin-left:auto;text-align:right;color:var(--ui-ink-3);font:12px/1.7 var(--ui-mono)}
+  .rowlabel{margin:22px 0 8px;display:flex;align-items:center;gap:10px;font:12px/1 var(--ui-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ui-ink-2)}
+  .rowlabel::after{content:"";flex:1;height:1px;background:var(--ui-line-1)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .cell{border:1px solid var(--ui-line-2);border-radius:6px;background:var(--ui-bg-base);overflow:hidden}
+  .cell h2{margin:10px 12px 2px;font-size:14px}
+  .cell p{margin:0 12px 10px;color:var(--ui-ink-2);font-size:11.5px;line-height:1.55}
+  .cell img{display:block;width:100%;border-top:1px solid var(--ui-line-1)}
+  .tokens{margin-top:24px;border-top:1px solid var(--ui-line-2);padding-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px 18px}
+  .tk{display:flex;align-items:center;gap:8px;font:11.5px/1.5 var(--ui-mono);color:var(--ui-ink-2)}
+  .sw{width:22px;height:22px;border-radius:4px;border:1px solid var(--ui-line-3);flex:none}
+  .tk b{color:var(--ui-ink);font-weight:500}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>三方向 · 绑定宿主配色</h1>
+      <p>颜色全部取自 DeepSeek Harness 的 <code>--dsw-alias-*</code>；浅色与深色各出一版，结构与字体不变。</p>
+    </div>
+    <div class="meta">面板 1240 × 900<br>2026-11-11 · dsh-hypit-workbench</div>
+  </header>
+
+  <div class="rowlabel">浅色主题</div>
+  <div class="grid">
+    <div class="cell"><h2>A · 媒体架</h2><p>左侧项目架 + 右侧 check/plan 并排，数据用等宽字。</p><img src="shots/a-dailies-light.png" alt="A light"></div>
+    <div class="cell"><h2>B · 剧本台</h2><p>源码当正文，check/plan 当页边批注，衬线刊头。</p><img src="shots/b-script-light.png" alt="B light"></div>
+    <div class="cell"><h2>C · 仪表</h2><p>三列：环境 / 项目表 / 观测区，三个大数字先给结论。</p><img src="shots/c-instrument-light.png" alt="C light"></div>
+  </div>
+
+  <div class="rowlabel">深色主题</div>
+  <div class="grid">
+    <div class="cell"><h2>A · 媒体架</h2><p>同一套 token 自动落到深色层次，不做第二套皮肤。</p><img src="shots/a-dailies-dark.png" alt="A dark"></div>
+    <div class="cell"><h2>B · 剧本台</h2><p>纸感去掉，结构留下：衬线 + 页边在深底上依然成立。</p><img src="shots/b-script-dark.png" alt="B dark"></div>
+    <div class="cell"><h2>C · 仪表</h2><p>荧光绿换成宿主强调色，选中条与状态章都走 token。</p><img src="shots/c-instrument-dark.png" alt="C dark"></div>
+  </div>
+
+  <div class="rowlabel" style="margin-top:26px">配色来源（色块为浅色主题取值）</div>
+  <div class="tokens">
+    <div class="tk"><span class="sw" style="background:var(--ui-bg-base)"></span><span><b>bg-base</b><br>页面底</span></div>
+    <div class="tk"><span class="sw" style="background:var(--ui-bg-layer)"></span><span><b>bg-layer-1</b><br>卡片面</span></div>
+    <div class="tk"><span class="sw" style="background:var(--ui-ink)"></span><span><b>label-primary</b><br>正文</span></div>
+    <div class="tk"><span class="sw" style="background:var(--ui-ink-3)"></span><span><b>label-caption</b><br>次要字</span></div>
+    <div class="tk"><span class="sw" style="background:var(--ui-accent)"></span><span><b>state-business</b><br>选中/链接</span></div>
+    <div class="tk"><span class="sw" style="background:var(--ui-primary)"></span><span><b>button-primary</b><br>主行动</span></div>
+    <div class="tk"><span class="sw" style="background:var(--ui-ok)"></span><span><b>state-success</b><br>通过</span></div>
+    <div class="tk"><span class="sw" style="background:var(--ui-warn)"></span><span><b>state-warn</b><br>待配置</span></div>
+  </div>
+</div>
+</body>
+</html>

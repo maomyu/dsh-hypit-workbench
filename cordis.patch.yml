@@ -1,0 +1,11 @@
+# 视频工作台的默认配置层。
+# roots：Hypit 视频项目的扫描根目录（只读扫描）。
+# talkingHead.directory：网感口播的工程存储目录，沿用旧插件的位置，已有口播会直接出现。
+- insert:
+    - id: hypit-workbench
+      name: dsh-hypit-workbench
+      config:
+        roots:
+          - "~/Hypit"
+        talkingHead:
+          directory: !!js dshHomePath('wanggan-talking-head')

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Hypit 工作台 · 六个候选方向</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500&family=Space+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#16181b;--dim:#6b7280;--line:#e3e4e1}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4f4f1;color:var(--ink);font-family:"Inter Tight","PingFang SC",system-ui,sans-serif}
+  .wrap{width:1288px;margin:0 auto;padding:32px 24px 44px;background:#f4f4f1}
+  header{display:flex;align-items:flex-end;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--ink)}
+  header h1{margin:0;font:600 23px/1.1 "Inter Tight",sans-serif;letter-spacing:-.02em}
+  header p{margin:5px 0 0;color:var(--dim);font-size:12.5px}
+  header .meta{margin-left:auto;text-align:right;font:400 10.5px/1.7 "IBM Plex Mono",monospace;color:var(--dim)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px}
+  .cell{display:flex;flex-direction:column;gap:8px}
+  .label{display:flex;align-items:baseline;gap:8px}
+  .label b{font:600 12.5px/1 "Inter Tight",sans-serif}
+  .label em{font:400 9.5px "IBM Plex Mono",monospace;color:var(--dim);font-style:normal}
+  .label .tag{margin-left:auto;font:400 8.5px "IBM Plex Mono",monospace;letter-spacing:.1em;color:#0e7c5a;border:1px solid rgba(14,124,90,.3);border-radius:2px;padding:2px 5px}
+  .label .tag.alt{color:var(--dim);border-color:var(--line)}
+  .shot{height:300px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(20,20,20,.05)}
+  .cap{margin:0;font:400 11.5px/1.6 "PingFang SC",sans-serif;color:#4b5563}
+  .cap b{font-weight:600}
+
+  /* A1 */
+  .a1{background:#0b0c0e;color:#e8eaee;display:grid;grid-template-columns:92px 1fr;height:100%}
+  .a1 .r{border-right:1px solid rgba(255,255,255,.08);padding:8px 7px;display:flex;flex-direction:column;gap:6px}
+  .a1 .r i{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.1)}
+  .a1 .r i.on{background:rgba(232,63,95,.5);box-shadow:inset 2px 0 0 #e83f5f;height:22px}
+  .a1 .r i.hd{background:rgba(255,255,255,.22);height:3px;width:60%}
+  .a1 .m{padding:8px 9px;display:flex;flex-direction:column;gap:6px;min-width:0}
+  .a1 h4{margin:0;font:600 11.5px/1 "Inter Tight",sans-serif}
+  .a1 .stats{display:flex;gap:8px;flex:none}
+  .a1 .stats s{flex:1;min-height:26px;border-top:1px solid rgba(255,255,255,.12);padding-top:2px;text-decoration:none;font:400 5.5px/1.5 "IBM Plex Mono",monospace;color:#666d77;letter-spacing:.08em}
+  .a1 .cards{display:grid;grid-template-columns:1fr 1fr;gap:4px;flex:none}
+  .a1 .cards div{border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:4px}
+  .a1 pre{margin:0;font:400 6.2px/1.5 "IBM Plex Mono",monospace;color:#9aa1ab;white-space:pre-wrap}
+  .a1 .code{flex:1;border:1px solid rgba(255,255,255,.08);border-top:0;padding:4px 5px;overflow:hidden;background:#101216}
+  .a1 .bar{height:16px;background:#15181d;border:1px solid rgba(255,255,255,.08);border-radius:2px;display:flex;align-items:center;gap:4px;padding:0 5px}
+  .a1 .bar s{width:18px;height:4px;background:rgba(255,255,255,.14);border-radius:1px;text-decoration:none}
+  .a1 .bar s.p{background:#e83f5f;width:26px}
+
+  /* A2 */
+  .a2{background:#f3f1ec;padding:9px;display:flex;flex-direction:column;gap:6px;height:100%}
+  .a2 .hd{display:flex;justify-content:space-between;font:500 7.5px "IBM Plex Mono",monospace;letter-spacing:.1em;color:#8b8577}
+  .a2 .grid2{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;flex:1}
+  .a2 .fr{border:1px solid #ddd6c8;border-radius:2px;position:relative;overflow:hidden;background:linear-gradient(150deg,#f7ecef,#eaeef3)}
+  .a2 .fr.on{outline:2px solid #b23a2b;outline-offset:-2px}
+  .a2 .fr span{position:absolute;left:3px;bottom:2px;font:400 6px "IBM Plex Mono",monospace;color:#8b8577}
+  .a2 .ft{display:flex;gap:4px;align-items:center;font:400 6.5px "IBM Plex Mono",monospace;color:#8b8577}
+  .a2 .ft s{flex:1;height:3px;background:#ddd6c8;text-decoration:none}
+
+  /* B1 */
+  .b1{background:#f4f0e6;padding:8px 9px;display:flex;flex-direction:column;height:100%}
+  .b1 .mast{display:flex;align-items:baseline;gap:5px;border-bottom:1.5px solid #23201b;padding-bottom:4px}
+  .b1 .mast b{font:500 12px/1 "Newsreader",serif}
+  .b1 .mast em{font:400 6.5px "IBM Plex Mono",monospace;color:#8b8272;font-style:normal;margin-left:auto}
+  .b1 .cols{display:grid;grid-template-columns:40px minmax(0,1fr) 64px;gap:6px;margin-top:6px;flex:1;min-height:0;overflow:hidden}
+  .b1 .idx{display:flex;flex-direction:column;gap:5px}
+  .b1 .idx i{display:block;height:4px;background:#d8d1c0}
+  .b1 .idx i.on{background:#a8372a}
+  .b1 .idx i.sub{background:#e4ddcd;width:70%}
+  .b1 pre{margin:0;font:400 6.3px/1.55 "IBM Plex Mono",monospace;color:#4a443b;white-space:pre-wrap;overflow:hidden}
+  .b1 .marg{border-left:1px solid #d8d1c0;padding-left:5px;overflow:hidden}
+  .b1 .marg p{margin:0 0 4px;font:400 5.8px/1.4 "Newsreader",serif;color:#6e6558;border-left:1.5px solid #a8372a;padding-left:3px;overflow:hidden}
+  .b1 .marg p.g{border-left-color:#3c6b4f}
+  .b1 .annot{margin-top:5px;border-top:1.5px solid #23201b;padding-top:4px;display:flex;align-items:center;gap:5px}
+  .b1 .annot s{height:4px;background:#d8d1c0;text-decoration:none}
+  .b1 .annot s.a{width:40px}.b1 .annot s.b{flex:1}.b1 .annot s.c{width:30px;background:#23201b;height:9px}
+
+  /* B2 */
+  .b2{background:#fbfbf9;padding:9px 10px;display:flex;flex-direction:column;height:100%}
+  .b2 .top{display:flex;border-top:3px solid #111;padding-top:4px;justify-content:space-between;font:500 6.5px "IBM Plex Mono",monospace;letter-spacing:.12em;color:#111}
+  .b2 h4{margin:7px 0 0;font:600 26px/.88 "Space Grotesk",sans-serif;letter-spacing:-.045em}
+  .b2 .row{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;margin-top:8px;flex:1}
+  .b2 .cellx{border-top:1px solid #111;padding-top:4px;margin-bottom:9px}
+  .b2 .cellx b{display:block;font:500 15px/.95 "Space Grotesk",sans-serif;letter-spacing:-.03em}
+  .b2 .cellx span{font:400 6px "IBM Plex Mono",monospace;color:#6b7280}
+  .b2 .ft{border-top:1px solid #111;padding-top:3px;display:flex;gap:6px;font:400 6px "IBM Plex Mono",monospace;color:#6b7280}
+  .b2 .ft s{flex:1;height:3px;background:#111;text-decoration:none}
+
+  /* C1 */
+  .c1{background:#eef1f0;display:grid;grid-template-columns:54px 84px 1fr;height:100%}
+  .c1 .rail{background:#f6f8f7;border-right:1px solid #dfe4e1;padding:7px 5px;display:flex;flex-direction:column;gap:5px}
+  .c1 .rail i{display:block;height:4px;background:#cde3d9;border-radius:1px}
+  .c1 .rail i.b{background:#0e7c5a;width:70%}
+  .c1 .rail i.h{background:#0e7c5a}
+  .c1 .lst{border-right:1px solid #dfe4e1;padding:7px 5px;display:flex;flex-direction:column;gap:5px}
+  .c1 .lst i{display:block;height:12px;background:#e6eae8;border-radius:2px}
+  .c1 .lst i.on{background:#c9f24d}
+  .c1 .lst i.sm{height:5px;width:76%}
+  .c1 .insp{background:#fff;padding:7px 8px;display:flex;flex-direction:column;gap:5px;min-width:0}
+  .c1 .nums{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #dfe4e1;padding-bottom:5px}
+  .c1 .nums b{font:600 15px/.85 "Space Grotesk",sans-serif;letter-spacing:-.04em}
+  .c1 .nums span{display:block;font:400 5px "IBM Plex Mono",monospace;color:#9aa49f}
+  .c1 pre{margin:0;font:400 6px/1.5 "IBM Plex Mono",monospace;color:#333d3a;background:#f7f9f8;border:1px solid #eef1ef;border-radius:2px;padding:3px 4px}
+  .c1 .srcb{border:1px solid #bfe6d3;background:#e6f2ec;border-radius:2px;height:9px}
+  .c1 .hand{margin-top:auto;border-top:1px solid #dfe4e1;padding-top:5px;display:flex;gap:4px;align-items:center}
+  .c1 .hand s{height:4px;background:#dfe4e1;text-decoration:none;flex:1}
+  .c1 .hand s.go{flex:none;width:34px;height:10px;background:#0d1211}
+
+  /* C2 */
+  .c2{background:#08131a;color:#cfe4ea;padding:8px 9px;display:flex;flex-direction:column;height:100%}
+  .c2 .hd{display:flex;justify-content:space-between;font:500 6.5px "IBM Plex Mono",monospace;letter-spacing:.12em;color:#5b7c88}
+  .c2 .spark{height:38px;margin:6px 0}
+  .c2 .spark svg{display:block;width:100%;height:100%}
+  .c2 .kv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:5px}
+  .c2 .kv div{border-left:2px solid #2f9e7d;padding-left:4px}
+  .c2 .kv b{display:block;font:500 12px/.95 "Space Grotesk",sans-serif;color:#e8f6f2}
+  .c2 .kv span{font:400 5px "IBM Plex Mono",monospace;color:#6f929e}
+  .c2 pre{margin:0;font:400 6px/1.45 "IBM Plex Mono",monospace;color:#8fb3bf;background:rgba(255,255,255,.03);border-radius:2px;padding:3px 4px;flex:1;overflow:hidden}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Hypit 工作台 · 六个候选</h1>
+      <p>三种逻辑各两个候选；绿色标记是展开成完整版的三张。同一份真实数据：~/Hypit 下 2 个项目、check 28 Outputs、plan 6 Requests。</p>
+    </div>
+    <div class="meta">面板位 1240 × 860<br>2026-11-11 · dsh-hypit-workbench</div>
+  </header>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="label"><b>A1 · 媒体架</b><em>DaVinci / Frame.io</em><span class="tag">展开 A</span></div>
+      <div class="shot">
+        <div class="a1">
+          <div class="r"><i class="hd"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          <div class="m">
+            <h4>smoke-test</h4>
+            <div class="stats"><s>OUTPUTS<br><b style="font-size:10px;color:#e8eaee">28</b></s><s>REQUESTS<br><b style="font-size:10px;color:#e8eaee">6</b></s><s>CHECK<br><b style="font-size:10px;color:#35c08e">3.2s</b></s></div>
+            <div class="cards">
+              <div><pre>+ Source is valid
+  Outputs 28</pre></div>
+              <div><pre>+ Build plan is valid
+  Requests 6</pre></div>
+            </div>
+            <div class="code"><pre> 1  &lt;?svml using="@hypit/markup@1"?&gt;
+ 2  &lt;svml&gt;
+ 3    &lt;import as="audio" from="@hypit/audio-track@1"/&gt;
+ 4    &lt;import as="visual" from="@hypit/visual-track@1"/&gt;
+ 5    &lt;import as="seedance" from="@hypit/seedance@1"/&gt;
+ 6    &lt;script id="story"&gt;
+ 7      &lt;opening&gt;&lt;HOST&gt;Here is @{proof}the useful part.@{/proof}&lt;/opening&gt;
+ 8    &lt;/script&gt;</pre></div>
+            <div class="bar"><s class="p"></s><s></s><s></s><s></s></div>
+          </div>
+        </div>
+      </div>
+      <p class="cap"><b>深色 media rack。</b>时间码像 NLE，状态用 LED 点，check/plan 并排像示波器。贴视频行业的手感。</p>
+    </div>
+
+    <div class="cell">
+      <div class="label"><b>A2 · 样片墙</b><em>Contact sheet</em><span class="tag alt">备选</span></div>
+      <div class="shot">
+        <div class="a2">
+          <div class="hd"><span>SMOKE-TEST · 28 OUTPUTS</span><span>2026-11-11</span></div>
+          <div class="grid2">
+            <div class="fr on"><span>01</span></div><div class="fr"><span>02</span></div><div class="fr"><span>03</span></div><div class="fr"><span>04</span></div>
+            <div class="fr"><span>05</span></div><div class="fr"><span>06</span></div><div class="fr"><span>07</span></div><div class="fr"><span>08</span></div>
+            <div class="fr"><span>09</span></div><div class="fr"><span>10</span></div><div class="fr"><span>11</span></div><div class="fr"><span>12</span></div>
+            <div class="fr"><span>13</span></div><div class="fr"><span>14</span></div><div class="fr"><span>15</span></div><div class="fr"><span>16</span></div>
+          </div>
+          <div class="ft"><s></s><span>16 / 28</span></div>
+        </div>
+      </div>
+      <p class="cap">浅色样片墙，每个 output 一格。结果多时好用；现在一条片子都还没生成，会大面积空。</p>
+    </div>
+
+    <div class="cell">
+      <div class="label"><b>B1 · 剧本台</b><em>纸 · 衬线 · 页边</em><span class="tag">展开 B</span></div>
+      <div class="shot">
+        <div class="b1">
+          <div class="mast"><b>剧本台</b><em>HYPIT / SMOKE-TEST</em></div>
+          <div class="cols">
+            <div class="idx"><i class="on"></i><i class="sub"></i><i></i><i class="sub"></i><i></i><i class="sub"></i><i></i></div>
+            <pre> 1  &lt;?svml using="@hypit/markup@1"?&gt;
+ 2  &lt;svml&gt;
+ 3    &lt;import as="audio" from="@hypit/audio-track@1"/&gt;
+ 4    &lt;import as="visual" from="@hypit/visual-track@1"/&gt;
+ 5    &lt;import from="@hypit/script@1"/&gt;
+ 6    &lt;import as="text" from="@hypit/text@1"/&gt;
+ 7    &lt;import as="seedance" from="@hypit/seedance@1"/&gt;
+ 8    &lt;import as="look" source="./look.svs"/&gt;
+ 9    &lt;script id="story"&gt;
+10      &lt;opening&gt;&lt;HOST&gt;Here is @{proof}the useful part.@{/proof}&lt;/opening&gt;
+11    &lt;/script&gt;
+12    &lt;space:Canvas id="canvas" width="720" height="1280"/&gt;</pre>
+            <div class="marg">
+              <p class="g">check：源码通过，28 处产出。</p>
+              <p class="g">plan：6 个请求，1 次 seedance 5 秒。</p>
+              <p>还差：Runtime Profile 未选，build 发不出去。</p>
+            </div>
+          </div>
+          <div class="annot"><s class="a"></s><s class="b"></s><s class="c"></s></div>
+        </div>
+      </div>
+      <p class="cap"><b>源码是正文，结果是页边批注。</b>SVML 本来就是按词写的稿子；这个方向把「读稿」当主任务。</p>
+    </div>
+
+    <div class="cell">
+      <div class="label"><b>B2 · 校样</b><em>瑞士网格</em><span class="tag alt">备选</span></div>
+      <div class="shot">
+        <div class="b2">
+          <div class="top"><span>HYPIT WORKBENCH</span><span>2026-11-11</span></div>
+          <h4>SMOKE<br>TEST</h4>
+          <div class="row">
+            <div class="cellx"><b>28</b><span>OUTPUTS</span></div>
+            <div class="cellx"><b>6</b><span>REQUESTS</span></div>
+            <div class="cellx"><b>3.2</b><span>SECONDS</span></div>
+            <div class="cellx"><b>2</b><span>PROJECTS</span></div>
+            <div class="cellx"><b>1</b><span>SOURCE</span></div>
+            <div class="cellx"><b>3</b><span>RUNS</span></div>
+          </div>
+          <div class="ft"><s></s><s></s><s></s></div>
+        </div>
+      </div>
+      <p class="cap">全大写、粗横线、巨字。气势够，但会把「哪个项目被选中」这种关键状态压没。</p>
+    </div>
+
+    <div class="cell">
+      <div class="label"><b>C1 · 仪表</b><em>Linear / Vercel</em><span class="tag">展开 C</span></div>
+      <div class="shot">
+        <div class="c1">
+          <div class="rail"><i class="h"></i><i class="b"></i><i class="b"></i><i class="b"></i></div>
+          <div class="lst"><i class="on"></i><i class="sm"></i><i></i><i class="sm"></i></div>
+          <div class="insp">
+            <div class="nums">
+              <div><span>OUTPUTS</span><b>28</b></div>
+              <div><span>REQUESTS</span><b>6</b></div>
+              <div><span>CHECK</span><b>3.2</b></div>
+            </div>
+            <pre>+ Source is valid      PASS 3.2s</pre>
+            <pre>+ Build plan is valid  PASS 3.0s
+  @hypit/seedance 1× 5s 720p 9:16
+  @hypit/media-operations#mux</pre>
+            <div class="srcb"></div>
+            <pre> 1  &lt;?svml using="@hypit/markup@1"?&gt;
+ 2  &lt;svml&gt;
+ 3    &lt;import as="audio" …</pre>
+            <div class="hand"><s></s><s class="go"></s></div>
+          </div>
+        </div>
+      </div>
+      <p class="cap"><b>浅冷底 + 荧光绿选中条。</b>数字最大：先把「28 / 6 / 3.2s」摆出来，命令输出当证据。</p>
+    </div>
+
+    <div class="cell">
+      <div class="label"><b>C2 · 遥测</b><em>服务器监控</em><span class="tag alt">备选</span></div>
+      <div class="shot">
+        <div class="c2">
+          <div class="hd"><span>SMOKE-TEST</span><span>LIVE</span></div>
+          <div class="spark">
+            <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+              <polyline points="0,30 20,26 40,28 60,18 80,21 100,12 120,16 140,9 160,13 180,6 200,8" fill="none" stroke="#2f9e7d" stroke-width="1.4"/>
+              <polyline points="0,34 20,33 40,35 60,32 80,33 100,30 120,31 140,29 160,30 180,28 200,29" fill="none" stroke="#1d4c5c" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="kv">
+            <div><b>28</b><span>OUTPUTS</span></div>
+            <div><b>6</b><span>REQUESTS</span></div>
+            <div><b>3.2s</b><span>CHECK</span></div>
+          </div>
+          <pre>12:04:11  check   pass
+12:04:18  plan    pass
+12:04:20  build   blocked  runtime-profile
+12:04:24  seedance  1×  5s  720p</pre>
+        </div>
+      </div>
+      <p class="cap">深青底 + 折线 + 日志流。像在盯一台机器，但这里其实没什么可实时监控的。</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

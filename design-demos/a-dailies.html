@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Hypit 工作台 · Dailies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="assets/host-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0d; --panel:#101216; --panel-2:#15181d; --line:rgba(255,255,255,.075);
+    --ink:#e8eaee; --dim:#b3bac4; --faint:#8a919b;
+    --pink:#e83f5f; --ok:#35c08e; --warn:#e0a63c;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Inter Tight","PingFang SC","Hiragino Sans GB",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#060708;font-family:var(--sans);color:var(--ink)}
+  .app{width:1240px;margin:0 auto;background:var(--bg);min-height:900px;padding:0 0 22px}
+  /* timecode ruler — the NLE cue */
+  .ruler{display:flex;height:26px;border-bottom:1px solid var(--line);align-items:flex-end;overflow:hidden;background:#08090b}
+  .ruler i{flex:1;position:relative;height:100%}
+  .ruler i::before{content:"";position:absolute;left:0;bottom:0;width:1px;height:7px;background:rgba(255,255,255,.16)}
+  .ruler i:nth-child(5n+1)::before{height:13px;background:rgba(255,255,255,.3)}
+  .ruler i span{position:absolute;left:5px;top:5px;font:400 9px/1 var(--mono);color:var(--faint);letter-spacing:.06em}
+  .top{display:flex;align-items:center;gap:16px;padding:14px 22px 12px;border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:9px}
+  .brand img{height:17px;display:block;filter:none}
+  .brand .slash{color:var(--faint);font:400 13px var(--mono)}
+  .brand b{font:600 13px/1 var(--sans);letter-spacing:.02em}
+  .env{display:flex;gap:18px;margin-left:auto;align-items:center}
+  .env div{display:flex;align-items:center;gap:6px;font:400 11px var(--mono);color:var(--dim)}
+  .led{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 6px rgba(53,192,142,.7)}
+  .led.w{background:var(--warn);box-shadow:0 0 6px rgba(224,166,60,.6)}
+  .env b{color:var(--ink);font-weight:400}
+  .root{margin-top:2px}
+  .main{display:grid;grid-template-columns:352px 1fr;min-height:740px}
+  /* rack */
+  .rack{border-right:1px solid var(--line);padding:16px 0 0}
+  .rack-head{display:flex;justify-content:space-between;align-items:baseline;padding:0 18px 10px;font:500 10px var(--mono);letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+  .rack-head span:last-child{letter-spacing:.04em}
+  .row{position:relative;display:block;padding:13px 18px 13px 20px;border-top:1px solid var(--line);cursor:pointer;transition:background .15s}
+  .row:hover{background:rgba(255,255,255,.025)}
+  .row.sel{background:linear-gradient(90deg,rgba(232,63,95,.1),rgba(232,63,95,0) 70%)}
+  .row.sel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--pink)}
+  .rt{display:flex;align-items:center;gap:8px;font:500 14px/1.3 var(--sans)}
+  .rt .dot{width:5px;height:5px;border-radius:50%;background:var(--ok)}
+  .rt .dot.w{background:var(--warn)}
+  .rt .n{margin-left:auto;font:400 11px var(--mono);color:var(--faint)}
+  .rp{margin:5px 0 0;font:400 11.5px var(--mono);color:var(--faint)}
+  .rm{margin-top:8px;display:flex;gap:12px;font:400 11px var(--mono);color:var(--dim)}
+  .rm span{display:flex;gap:4px;align-items:center}
+  .rm i{width:3px;height:3px;border-radius:50%;background:var(--faint);display:inline-block}
+  .rack-foot{margin:18px;padding-top:14px;border-top:1px dashed var(--line);font:400 11px/1.7 var(--mono);color:var(--faint)}
+  /* inspector */
+  .insp{padding:18px 22px 0;min-width:0}
+  .ihead{display:flex;align-items:flex-start;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .ihead h1{margin:0;font:600 26px/1.15 var(--sans);letter-spacing:-.01em}
+  .ihead p{margin:6px 0 0;font:400 11.5px var(--mono);color:var(--faint)}
+  .badge{margin-left:auto;display:flex;align-items:center;gap:6px;border:1px solid rgba(53,192,142,.35);color:var(--ok);border-radius:4px;padding:4px 8px;font:400 10.5px var(--mono);letter-spacing:.04em}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+  .stat{padding:13px 0 12px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat em{display:block;font:500 10px var(--mono);letter-spacing:.12em;color:var(--faint);text-transform:uppercase;font-style:normal}
+  .stat b{display:block;margin-top:5px;font:500 19px/1 var(--mono);letter-spacing:-.02em}
+  .stat small{font:400 10.5px var(--mono);color:var(--faint);margin-left:5px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin-top:16px;border:1px solid var(--line)}
+  .card{background:var(--panel);padding:12px 13px}
+  .card-h{display:flex;align-items:baseline;gap:8px;margin-bottom:9px}
+  .card-h strong{font:500 11.5px var(--mono);color:var(--dim);letter-spacing:.02em}
+  .pill{margin-left:auto;font:400 10px var(--mono);padding:2px 6px;border-radius:3px}
+  .pill.ok{background:rgba(53,192,142,.12);color:var(--ok)}
+  .pill.run{background:rgba(224,166,60,.12);color:var(--warn)}
+  pre{margin:0;font:400 11px/1.72 var(--mono);color:#c6ccd6;white-space:pre-wrap;word-break:break-word}
+  pre .g{color:var(--ok)} pre .d{color:var(--faint)} pre .k{color:#c9d3e0}
+  /* source */
+  .tabs{display:flex;gap:0;margin-top:16px;border-bottom:1px solid var(--line)}
+  .tab{padding:8px 12px;font:400 11px var(--mono);color:var(--faint);border-bottom:1px solid transparent;cursor:pointer}
+  .tab.on{color:var(--ink);border-bottom-color:var(--pink)}
+  .tab b{color:var(--faint);font-weight:400;margin-left:6px}
+  .code{position:relative;background:var(--panel);border:1px solid var(--line);border-top:0;max-height:196px;overflow:hidden}
+  .code pre{padding:11px 13px;font-size:11px;line-height:1.78}
+  .code .ln{display:inline-block;width:24px;color:#6f7681;user-select:none}
+  .fade{position:absolute;inset:auto 0 0 0;height:40px;background:linear-gradient(rgba(16,18,22,0),var(--panel))}
+  /* handoff */
+  .hand{margin-top:16px;border:1px solid var(--line);background:var(--panel-2);padding:13px 14px;display:flex;gap:14px;align-items:flex-end}
+  .kinds{display:flex;gap:6px;margin-bottom:9px}
+  .kind{font:400 11px var(--mono);color:var(--dim);border:1px solid var(--line);border-radius:3px;padding:5px 9px;cursor:pointer}
+  .kind.on{color:#fff;border-color:var(--pink);background:rgba(232,63,95,.14)}
+  .hand label{flex:1;min-width:0}
+  .hand span{display:block;font:400 10px var(--mono);color:var(--faint);margin-bottom:6px}
+  .hand input{width:100%;background:#0b0d10;border:1px solid var(--line);color:var(--ink);font:400 12px var(--mono);padding:9px 10px;border-radius:3px;outline:none}
+  .go{background:#c92a4e;color:#fff;border:0;border-radius:4px;padding:10px 16px;font:600 12px var(--sans);cursor:pointer;white-space:nowrap}
+  .foot{margin-top:10px;font:400 10.5px var(--mono);color:var(--faint);display:flex;justify-content:space-between}
+</style>
+
+<style>
+  /* 可读性下限：正文 14 / 标签 12 */
+  .app{font-size:14px}
+  .ruler i span{display:none}
+  .env div{font-size:12px}
+  .rack-head{font-size:12px;letter-spacing:.1em}
+  .rt{font-size:15px}
+  .rt .n{font-size:12px}
+  .rp{font-size:12px}
+  .rm{font-size:12px;gap:14px}
+  .rack-foot{font-size:12px}
+  .ihead p{font-size:12px}
+  .badge{font-size:12px}
+  .stat em{font-size:12px;letter-spacing:.06em}
+  .stat b{font-size:21px}
+  .stat small{font-size:12px}
+  .card-h strong{font-size:12.5px}
+  .pill{font-size:11.5px}
+  pre{font-size:12px}
+  .code{max-height:322px}
+  .code pre{font-size:12px;line-height:1.7}
+  .tab{font-size:12px}
+  .tab b{font-size:11.5px}
+  .kind{font-size:12px}
+  .hand span{font-size:12px}
+  .hand input{font-size:13px}
+  .foot{font-size:12px}
+</style>
+
+<style>
+  /* 绑定宿主 token：结构不变，颜色全部来自 --ui-* */
+  :root{
+    --bg:var(--ui-bg-base); --panel:var(--ui-bg-layer); --panel-2:var(--ui-bg-sunken);
+    --line:var(--ui-line-2); --ink:var(--ui-ink); --dim:var(--ui-ink-2); --faint:var(--ui-ink-3);
+    --pink:var(--ui-accent); --ok:var(--ui-ok); --warn:var(--ui-warn);
+  }
+  html,body{background:var(--ui-bg-sunken)}
+  .ruler{background:var(--ui-bg-sunken)}
+  .ruler i::before{background:var(--ui-line-3)}
+  .ruler i:nth-child(5n+1)::before{background:var(--ui-line-4)}
+  .row.sel{background:linear-gradient(90deg,color-mix(in srgb,var(--ui-accent) 10%,transparent),transparent 72%)}
+  .row.sel::before{background:var(--ui-accent)}
+  .badge{border-color:color-mix(in srgb,var(--ui-ok) 45%,transparent);color:var(--ui-ok-text)}
+  .led{background:var(--ui-ok);box-shadow:none}
+  .led.w{background:var(--ui-warn);box-shadow:none}
+  .pill.ok{background:var(--ui-ok-bg);color:var(--ui-ok-text)}
+  .pill.run{background:var(--ui-warn-bg);color:var(--ui-warn)}
+  pre{color:var(--ui-ink-2)}
+  pre .g{color:var(--ui-ok-text)}
+  .code{background:var(--ui-code-bg)}
+  .fade{background:linear-gradient(color-mix(in srgb,var(--ui-code-bg) 0%,transparent),var(--ui-code-bg))}
+  .hand{background:var(--ui-bg-sunken)}
+  .hand input{background:var(--ui-bg-base)}
+  .go{background:var(--ui-primary);color:var(--ui-on-primary)}
+  .go:hover{background:var(--ui-primary)}
+  .kind.on{color:var(--ui-ink);border-color:var(--ui-accent);background:color-mix(in srgb,var(--ui-accent) 12%,transparent)}
+  .tab.on{border-bottom-color:var(--ui-accent)}
+  .stat b{font-variant-numeric:tabular-nums}
+  .brand .lg-dark{display:none}
+  @media (prefers-color-scheme:dark){.brand .lg-light{display:none}.brand .lg-dark{display:inline-block}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="ruler">
+    <i><span>00:00</span></i><i></i><i></i><i></i><i></i><i><span>00:05</span></i><i></i><i></i><i></i><i></i>
+    <i><span>00:10</span></i><i></i><i></i><i></i><i></i><i><span>00:15</span></i><i></i><i></i><i></i><i></i>
+    <i><span>00:20</span></i><i></i><i></i><i></i><i></i><i><span>00:25</span></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <div class="top">
+    <div class="brand">
+      <img class="lg-light" src="assets/hypit-logo-dark.svg" alt="Hypit"><img class="lg-dark" src="assets/hypit-logo-light.svg" alt="Hypit">
+      <span class="slash">/</span><b>工作台</b>
+    </div>
+    <div class="env">
+      <div><i class="led"></i>执行器 <b>0.3.2</b></div>
+      <div><i class="led"></i>技能 <b>已安装</b></div>
+      <div><i class="led"></i>Node <b>v24.21.0</b></div>
+      <div class="root"><i class="led w"></i>~/Hypit <b>2 项</b></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <aside class="rack">
+      <div class="rack-head"><span>项目</span><span>最近更新 ↓</span></div>
+
+      <div class="row sel">
+        <div class="rt"><i class="dot"></i>smoke-test<span class="n">28</span></div>
+        <p class="rp">~/Hypit/smoke-test</p>
+        <div class="rm"><span><i></i>1 源</span><span><i></i>3 Run</span><span><i></i>12 分钟前</span></div>
+      </div>
+
+      <div class="row">
+        <div class="rt"><i class="dot w"></i>podcast-clip<span class="n">—</span></div>
+        <p class="rp">~/Hypit/podcast-clip</p>
+        <div class="rm"><span><i></i>1 源</span><span><i></i>3 Run</span><span><i></i>3 分钟前</span></div>
+      </div>
+
+      <div class="rack-foot">
+        <div>扫描根目录　~/Hypit</div>
+        <div>只读项目文件　不写回</div>
+      </div>
+    </aside>
+
+    <section class="insp">
+      <div class="ihead">
+        <div>
+          <h1>smoke-test</h1>
+          <p>~/Hypit/smoke-test · package.json · hypit.project = true</p>
+        </div>
+        <div class="badge">SRC OK</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><em>Outputs</em><b>28</b></div>
+        <div class="stat"><em>Requests</em><b>6</b></div>
+        <div class="stat"><em>Sources</em><b>1<small>svml</small></b></div>
+        <div class="stat"><em>Runs</em><b>3<small>svrun</small></b></div>
+      </div>
+
+      <div class="cols">
+        <div class="card">
+          <div class="card-h"><strong>hypit check</strong><span class="pill ok">PASS · 3.2s</span></div>
+<pre><span class="g">+</span> Source is valid
+
+  Source   examples/production.svml
+  Outputs  <span class="k">28</span></pre>
+        </div>
+        <div class="card">
+          <div class="card-h"><strong>hypit plan</strong><span class="pill ok">PASS · 3.0s</span></div>
+<pre><span class="g">+</span> Build plan is valid
+  Targets  final.video   <span class="d">Requests 6</span>
+
+<span class="d">@hypit/media-operations</span>#render-timeline-audio
+<span class="d">@hypit/seedance</span>#seedance-2-mini <span class="d">×1  5s 720p 9:16</span></pre>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab on">examples/production.svml<b>75 行</b></div>
+        <div class="tab">examples/look.svs<b>4 行</b></div>
+        <div class="tab">examples/direction.svs<b>15 行</b></div>
+      </div>
+      <div class="code">
+<pre><span class="ln">1</span>&lt;?svml using="@hypit/markup@1"?&gt;
+<span class="ln">2</span>&lt;svml&gt;
+<span class="ln">3</span>  &lt;import as="audio" from="@hypit/audio-track@1"/&gt;
+<span class="ln">4</span>  &lt;import as="visual" from="@hypit/visual-track@1"/&gt;
+<span class="ln">5</span>  &lt;import from="@hypit/script@1"/&gt;
+<span class="ln">6</span>  &lt;import as="text" from="@hypit/text@1"/&gt;
+<span class="ln">7</span>  &lt;import as="seedance" from="@hypit/seedance@1"/&gt;
+<span class="ln">8</span>  &lt;import as="look" source="./look.svs"/&gt;
+<span class="ln">9</span>  &lt;script id="story"&gt;
+<span class="ln">10</span>    &lt;opening&gt;&lt;HOST&gt;Here is @{proof}the useful part.@{/proof}&lt;/opening&gt;
+<span class="ln">11</span>  &lt;/script&gt;</pre>
+        <div class="fade"></div>
+      </div>
+
+      <div class="hand">
+        <div>
+          <div class="kinds">
+            <span class="kind">克隆参考视频</span>
+            <span class="kind on">从描述制作</span>
+            <span class="kind">继续这个项目</span>
+          </div>
+          <label>
+            <span>想做什么视频</span>
+            <input value="20 秒竖屏，咖啡对比测评">
+          </label>
+        </div>
+        <button class="go">在对话中开始</button>
+      </div>
+      <div class="foot"><span>只生成对话草稿，不自动发送、不产生费用</span><span>hypit-workbench 0.2.0</span></div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

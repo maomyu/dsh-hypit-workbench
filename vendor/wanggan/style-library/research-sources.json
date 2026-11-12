@@ -1,0 +1,281 @@
+[
+  {
+    "id": "R01",
+    "title": "MoMA · Collage",
+    "url": "https://www.moma.org/collection/terms/collage",
+    "scope": "拼贴的材料与组合观察；本目录配方为本项目原创设计"
+  },
+  {
+    "id": "R02",
+    "title": "Adobe · Stop motion animation",
+    "url": "https://www.adobe.com/creativecloud/animation/discover/stop-motion-animation.html",
+    "scope": "物件逐帧与材料动画方法；不据此声称已拍摄定格片"
+  },
+  {
+    "id": "R03",
+    "title": "V&A · Art Nouveau – an international style",
+    "url": "https://www.vam.ac.uk/articles/art-nouveau-an-international-style",
+    "scope": "有机曲线与结构/装饰关系"
+  },
+  {
+    "id": "R04",
+    "title": "V&A · An introduction to Art Deco",
+    "url": "https://www.vam.ac.uk/articles/an-introduction-to-art-deco",
+    "scope": "几何与装饰艺术的来源；本目录不是艺术史分类全集"
+  },
+  {
+    "id": "R05",
+    "title": "The Met · Chinese Painting",
+    "url": "https://www.metmuseum.org/zh/essays/chinese-painting",
+    "scope": "笔墨、纸绢与画卷阅读的参考；不作为全部东方工艺的来源"
+  },
+  {
+    "id": "R06",
+    "title": "Cooper Hewitt · A Harmony of Contrasts",
+    "url": "https://www.cooperhewitt.org/2018/08/05/aharmonyofcontrasts/",
+    "scope": "瑞士平面中的网格、字体、摄影与对比关系"
+  },
+  {
+    "id": "R07",
+    "title": "MoMA · Woodcut",
+    "url": "https://www.moma.org/collection/terms/woodcut",
+    "scope": "凸起受墨与挖去留白的制作机制；原创解释图，不复制馆藏"
+  },
+  {
+    "id": "R08",
+    "title": "RISO · Corporate profile / stencil printing",
+    "url": "https://www.riso.co.uk/pdf/profile.pdf",
+    "scope": "官方孔版与墨层工艺说明；本次核对搜索摘录，PDF完整打开失败，不声称审看整份文档"
+  },
+  {
+    "id": "R09",
+    "title": "V&A · Photography processes and techniques / Cyanotype",
+    "url": "https://www.vam.ac.uk/info/collection-selection-boxes-photography-processes-and-techniques",
+    "scope": "感光纸与遮光负形机制；代码模拟原创示意，非实拍感光纸"
+  },
+  {
+    "id": "R10",
+    "title": "MoMA · Rediscovering The New Typography",
+    "url": "https://production-gcp.moma.org/explore/inside_out/2010/02/12/rediscovering-the-new-typography/",
+    "scope": "构成主义延伸到非对称排印、几何块面、图文组织的参考；本项目原创财经示意，不复制作品或政治宣传"
+  },
+  {
+    "id": "R11",
+    "title": "Design Museum · Memphis",
+    "url": "https://designmuseum.org/memphis",
+    "scope": "完整阅读馆方文字，提炼几何、纹样和错位物件关系；原创财经解释图，不复制馆藏作品"
+  },
+  {
+    "id": "R12",
+    "title": "MoMA · Op art",
+    "url": "https://www.moma.org/collection/terms/op-art",
+    "scope": "核对馆方搜索摘录中的几何黑白、感知与视错觉定义；未声称审看原作全展。本片用粗尺度图底与缓慢小幅位移"
+  },
+  {
+    "id": "R13",
+    "title": "Smithsonian Libraries · Paper Engineering",
+    "url": "https://library.si.edu/digital-library/exhibition/paper-engineering/page-turners-paper-engineering-fold-pull-pop-turn",
+    "scope": "核对馆方搜索摘录的折、拉、立起机关主题；页面完整打开失败，不声称看过全部机关结构图。本片书脊与V形支撑为原创三维构建"
+  },
+  {
+    "id": "R14",
+    "title": "FEFCO · What is corrugated?",
+    "url": "https://www.fefco.org/node/1588",
+    "scope": "完整阅读两面纸与中间波纹芯的单瓦楞结构说明，实际建模为空心波纹层；不冒充实物摄影"
+  },
+  {
+    "id": "R15",
+    "title": "The Met · Graphite",
+    "url": "https://www.metmuseum.org/perspectives/materials-and-techniques-drawing-graphite",
+    "scope": "完整阅读材料说明，参考细线、排线、擦亮与软硬线重；原创AI概念图和局部显现，不复制馆藏或声称实拍绘画"
+  },
+  {
+    "id": "R16",
+    "title": "The Met · Charcoal",
+    "url": "https://www.metmuseum.org/perspectives/materials-and-techniques-drawing-charcoal",
+    "scope": "完整阅读宽线、块面、揉擦和提亮机制；以宽幅松散炭迹区分铅笔，不声称还原真实绘画过程"
+  },
+  {
+    "id": "R17",
+    "title": "The Met · Pastel",
+    "url": "https://www.metmuseum.org/perspectives/materials-and-techniques-drawing-pastel",
+    "scope": "完整阅读粉状不透明色层与纸齿、侧笔和局部揉擦说明；本片用AI概念图表现，人物与正文不受晕染"
+  },
+  {
+    "id": "R18",
+    "title": "The Met · Ink",
+    "url": "https://www.metmuseum.org/perspectives/materials-and-techniques-drawing-ink",
+    "scope": "完整阅读钢笔、记号笔与刷笔的线性/色面关系，提炼笔迹差异，不复制作品或编造绘画时序"
+  },
+  {
+    "id": "R19",
+    "title": "Google Fonts · Ma Shan Zheng",
+    "url": "https://github.com/google/fonts/tree/main/ofl/mashanzheng",
+    "scope": "实际读取官方METADATA与OFL，下载未修改TTF并核对所用汉字覆盖；保存版权许可和精确SHA，正文字幕仍用清晰本地字体"
+  },
+  {
+    "id": "R20",
+    "title": "V&A · Illustration",
+    "url": "https://www.vam.ac.uk/collections/illustration",
+    "scope": "完整读取集合说明，实际查看Rolf Brandt书籍插画的320px馆方图，观察连续地形与路径组织；具体藏品页受限，不声称看过完整原作或其动画"
+  },
+  {
+    "id": "R21",
+    "title": "Smithsonian · Science to Go botanical illustration",
+    "url": "https://naturalhistory.si.edu/research/botany/news/plant-press/science-go-features-lesson-botanical-illustration",
+    "scope": "完整读取说明并查看实际多视图观察资料页，提炼对象/局部对应；本片日常物件只借观察图版语法，AI示意不冒充真实物种、科学测量或实物准确记录"
+  },
+  {
+    "id": "R22",
+    "title": "MoMA · Arp torn-and-pasted paper",
+    "url": "https://www.moma.org/collection/works/37013",
+    "scope": "完整读取馆方撕纸与纸内纤维说明，原作图片获取403，未作原图视觉比对；本片用原创AI纸层概念图，不复制构图、不声称真正手撕实拍"
+  },
+  {
+    "id": "R23",
+    "title": "BFI · Cinderella cut-out figures and backgrounds",
+    "url": "https://www.bfi.org.uk/inside-the-archive/features/object-week-lotte-reiniger-cut-out-figures-backgrounds-cinderella",
+    "scope": "完整读取并实际查看人物关节纸片与分层背景两图，提炼背光轮廓、负空间和明度层；本片为原创SVG物件寓言，不复制人物、布景或声称复刻完整电影"
+  },
+  {
+    "id": "R24",
+    "title": "V&A · Quilting and patchwork",
+    "url": "https://www.vam.ac.uk/collections/quilting-and-patchwork",
+    "scope": "读取馆方拼布/绗缝区分并实际查看集合页320px织物图，只能观察中心放射图案与外围几何块面，不足以判断细针法；本片采用原创AI织片拼接图记，不复制原作构图"
+  },
+  {
+    "id": "R25",
+    "title": "Met · Jar with dragon, 37.191.1",
+    "url": "https://www.metmuseum.org/art/collection/search/39666",
+    "scope": "读馆方透明釉下钴蓝笔绘说明并实际看900×1200器物照，观察器口、肩腹曲面、分带笔绘与高光；本片生成原创浅盘及现代图记，不复制龙纹、款识或文物身份"
+  },
+  {
+    "id": "R26",
+    "title": "故宫 · 王希孟千里江山图卷",
+    "url": "https://www.dpm.org.cn/collection/paint/228354.html",
+    "scope": "读馆方长卷/多点观察/青绿材料说明并实际看1258×500局部，观察山体分组、留水、近远尺度与边角红印；只看该局部，不声称看完11米长卷或读清印文；本片是原创AI山水意象，不作真实地理"
+  },
+  {
+    "id": "R27",
+    "title": "敦煌研究院 · 莫高窟第217窟",
+    "url": "https://www.dha.ac.cn/info/1425/3604.htm",
+    "scope": "读馆方具体画面说明，实际看450×314整壁及450×307山水两图，观察中央/周缘故事空间、矿物平涂、不同观察距离与壁面磨损；低分辨率不能支持精细笔法判断，本片不用宗教图像或旧壁画，做原创现代物件双画带解释示意"
+  },
+  {
+    "id": "R28",
+    "title": "故宫 · 印版五子夺莲年画",
+    "url": "https://www.dpm.org.cn/collection/paint/232053.html",
+    "scope": "读馆方说明并实际看1024×577原作，观察简练曲线、有限色面、疏密与叙事关系；这件的颜色较柔和，本片红绿黄粗版是原创取舍，不称所有年画固定如此；不复制童子或把现代盾/包说成传统吉祥纹样"
+  },
+  {
+    "id": "R29",
+    "title": "Met · Xie Zhiliu exhibition, The Art of Seal Carving",
+    "url": "https://www.metmuseum.org/exhibitions/listings/2010/xie-zhiliu",
+    "scope": "读取朱白正负印、印面与边界关系说明；单件72868页禁止下载/放大，未绕过限制获取图。实际视觉观察仅来自R26局部边角可见红印，不声称读清印文或查看Met具体印面；本片原生SVG现代图记和可读字，不伪造篆字或名家/机构印章"
+  },
+  {
+    "id": "R30",
+    "title": "Lacquerware of East Asia",
+    "url": "https://www.metmuseum.org/essays/lacquerware-of-east-asia",
+    "scope": "正文已读：区分平面漆绘、戗金与撒粉，不把不同工艺混称；下一批选原创深漆面和细金线意象。未实际查看馆藏高清图"
+  },
+  {
+    "id": "R31",
+    "title": "Watercolor — Materials and Techniques",
+    "url": "https://www.metmuseum.org/perspectives/materials-and-techniques-drawing-watercolor",
+    "scope": "正文已读，实际查看文章所附Homer叶片、Heinrich山峰、Turner湖面三张1000px局部及其390px拼版；观察纸白、干湿边和透明色层差异，仅提炼媒介逻辑，不复制原作构图或将湿边泛化。生成图解属原创概念，非物理水彩模拟"
+  },
+  {
+    "id": "R32",
+    "title": "Impasto — National Gallery glossary",
+    "url": "https://www.nationalgallery.org.uk/paintings/glossary/impasto",
+    "scope": "正文已读：厚颜料、画笔/调色刀痕迹；拟让侧光笔脊与遮盖关系成立，真人无油彩滤镜。未看作品像素"
+  },
+  {
+    "id": "R33",
+    "title": "How was it made? Stained glass",
+    "url": "https://www.vam.ac.uk/articles/how-was-it-made-stained-glass",
+    "scope": "正文已读：分块彩玻、绘制与铅条连接；拟用原创非宗教图案，不仅色块贴图，不声称观看过视频"
+  },
+  {
+    "id": "R34",
+    "title": "A Brief Introduction to Roman Mosaics",
+    "url": "https://www.getty.edu/news/a-brief-introduction-to-roman-mosaics/",
+    "scope": "正文已读：嵌片、砂浆与铺排；拟独立嵌片及可辨接缝，不仿制真实古代嵌画。未查看嵌片特写像素"
+  },
+  {
+    "id": "R35",
+    "title": "Enamels — Explore the Collections",
+    "url": "https://www.vam.ac.uk/collections/enamels",
+    "scope": "集合正文已读；下一批金属围边与釉色凸物仍为原创现代意象，无馆藏身份。具体分隔工艺待继续研究"
+  },
+  {
+    "id": "R36",
+    "title": "Three.js r181: physical material, PMREM and rounded geometry",
+    "url": "https://github.com/mrdoob/three.js/tree/r181",
+    "scope": "已读本机固定r181物理材质/厚度/PMREM接口与RoundedBox源码，原始MIT许可来自同版本官方文件；仅作为实现接口依据，不冒称制作工艺、流体或真实光学实验。实际视觉/寻址与整片证据另记"
+  },
+  {
+    "id": "R37",
+    "title": "File:Desktop with laptop and calculator (Unsplash).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Desktop_with_laptop_and_calculator_(Unsplash).jpg",
+    "scope": "本批真实摄影原始资料；作者未标明（Commons记录） / CC0。仅数字裁切/注释/合成，黑白方向照片灰度；不代表本段人物、事件、交易或观点背书",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sha256": "af589f564954f165c05c138b03585c7bb92b824239adfe815416c78e0055f5b0"
+  },
+  {
+    "id": "R38",
+    "title": "File:Two 20kr gold coins.png",
+    "url": "https://commons.wikimedia.org/wiki/File:Two_20kr_gold_coins.png",
+    "scope": "本批真实摄影原始资料；Anonimski / CC0。仅数字裁切/注释/合成，黑白方向照片灰度；不代表本段人物、事件、交易或观点背书",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sha256": "de00e068aa6dfbcb6e1962d19a85192bcf853658508cd4f78a2401b364c8f140"
+  },
+  {
+    "id": "R39",
+    "title": "File:Books, pencils, laptop, and iphone on a desk (Unsplash).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Books,_pencils,_laptop,_and_iphone_on_a_desk_(Unsplash).jpg",
+    "scope": "本批真实摄影原始资料；Aleks Dorohovich aleksdorohovich / CC0。仅数字裁切/注释/合成，黑白方向照片灰度；不代表本段人物、事件、交易或观点背书",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sha256": "7ba81b25cbebd0d877feaea8ca6f9a1235c5f9fe79486e2ee1f102093a8e87f0"
+  },
+  {
+    "id": "R40",
+    "title": "File:Black white concrete interior (Unsplash).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Black_white_concrete_interior_(Unsplash).jpg",
+    "scope": "本批真实摄影原始资料；Verne Ho verneho / CC0。仅数字裁切/注释/合成，黑白方向照片灰度；不代表本段人物、事件、交易或观点背书",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sha256": "6e67650ac6e1b4fd390b7a1f826cd46738e4571bc4f07bc22ee168eccf3f4149"
+  },
+  {
+    "id": "R41",
+    "title": "File:Spotlight stage August Wilson Center.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Spotlight_stage_August_Wilson_Center.jpg",
+    "scope": "本批真实摄影原始资料；daveynin from United States / CC BY 2.0。仅数字裁切/注释/合成，黑白方向照片灰度；不代表本段人物、事件、交易或观点背书",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "sha256": "903103af5f89eaadfd48e89f5eec068114631e35833b677488c3685de7e769d8"
+  },
+  {
+    "id": "R42",
+    "title": "File:Healthy Grocery Shopping (Unsplash).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Healthy_Grocery_Shopping_(Unsplash).jpg",
+    "scope": "本批真实摄影原始资料；leonie wise leoniewise / CC0。仅数字裁切/注释/合成，黑白方向照片灰度；不代表本段人物、事件、交易或观点背书",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sha256": "7e1e1a1d2d0aad2d04c6edd55f5bd28e74bd91b3538b8a9a26e603c452dbebee"
+  },
+  {
+    "id": "R43",
+    "title": "File:Yan'an East Road Interchange, Shanghai, China (Unsplash).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Yan%27an_East_Road_Interchange,_Shanghai,_China_(Unsplash).jpg",
+    "scope": "本批真实摄影原始资料；Denys Nevozhai dnevozhai / CC0。仅数字裁切/注释/合成，黑白方向照片灰度；不代表本段人物、事件、交易或观点背书",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sha256": "d6f039039d4dad6a16eba58ec003ee4d7093e328b1bd2de9f10a84a5bcbc7f92"
+  }
+]

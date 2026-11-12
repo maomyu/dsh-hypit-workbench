@@ -1,0 +1,95 @@
+{
+  "name": "dsh-hypit-workbench",
+  "version": "0.15.0",
+  "description": "视频工作台 · 网感口播剪辑与 Hypit 视频制作，对话驱动",
+  "type": "module",
+  "main": "./src/host.js",
+  "exports": {
+    ".": "./src/host.js",
+    "./client": "./dist/client.js",
+    "./typert": "./src/typert.js",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist",
+    "scripts",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "INSTALL.md",
+    "LICENSE",
+    "NOTICE.md",
+    "docs",
+    "vendor",
+    "requirements-macos.txt"
+  ],
+  "engines": {
+    "dsh": "0.2.2-rc.2",
+    "node": ">=22.15.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-api-workspace-controller",
+        "@deepseek-ai/dsh-client-ui-layout"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check src/host.js && node --check src/store.js && node --check src/view.js && node --check src/prompt.js && node --check src/session-access.js && node --check src/typert.js && node scripts/check-dist.mjs",
+    "test": "node --test test/*.test.js test/talking-head/*.test.js",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-skill": "0.2.2-rc.2",
+    "dsh-media-providers": ">=0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-typert-protocol": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-skill": {
+      "optional": true
+    },
+    "dsh-media-providers": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "react": "^18.3.1"
+  },
+  "author": "Maoyu",
+  "license": "MIT",
+  "dependencies": {
+    "hyperframes": "0.8.174"
+  },
+  "bundleDependencies": [
+    "hyperframes"
+  ],
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ]
+}
